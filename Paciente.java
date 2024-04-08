@@ -3,14 +3,16 @@ public class Paciente implements Comparable<Paciente> {
     private String sintoma;
     private char codigoEmergencia;
 
-    // Constructor
     public Paciente(String nombre, String sintoma, char codigoEmergencia) {
         this.nombre = nombre;
         this.sintoma = sintoma;
-        this.codigoEmergencia = codigoEmergencia;
+        if (codigoEmergencia >= 'A' && codigoEmergencia <= 'E') {
+            this.codigoEmergencia = codigoEmergencia;
+        } else {
+            throw new IllegalArgumentException("El código de emergencia debe ser una letra entre A y E");
+        }
     }
 
-    // Getters y Setters
     public String getNombre() {
         return nombre;
     }
@@ -32,16 +34,18 @@ public class Paciente implements Comparable<Paciente> {
     }
 
     public void setCodigoEmergencia(char codigoEmergencia) {
-        this.codigoEmergencia = codigoEmergencia;
+        if (codigoEmergencia >= 'A' && codigoEmergencia <= 'E') {
+            this.codigoEmergencia = codigoEmergencia;
+        } else {
+            throw new IllegalArgumentException("El código de emergencia debe ser una letra entre A y E");
+        }
     }
 
-    // Método compareTo para comparar pacientes por su código de emergencia
     @Override
     public int compareTo(Paciente otroPaciente) {
         return Character.compare(this.codigoEmergencia, otroPaciente.getCodigoEmergencia());
     }
 
-    // Método toString para representar un paciente como una cadena de texto
     @Override
     public String toString() {
         return nombre + ", " + sintoma + ", " + codigoEmergencia;

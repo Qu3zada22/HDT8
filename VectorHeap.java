@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Vector;
 
 public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E> {
@@ -5,6 +8,27 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
     public VectorHeap() {
         data = new Vector<>();
+    }
+
+    // Constructor adicional para construir el heap a partir de un archivo
+    public VectorHeap(String filename) {
+        this();
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(", ");
+                if (partes.length == 3) {
+                    String nombre = partes[0];
+                    String sintoma = partes[1];
+                    char codigoEmergencia = partes[2].charAt(0);
+                    @SuppressWarnings("unchecked")
+                    E paciente = (E) new Paciente(nombre, sintoma, codigoEmergencia);
+                    add(paciente);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
     }
 
     // Método para obtener el índice del padre de un nodo en el heap
