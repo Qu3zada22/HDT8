@@ -30,7 +30,3 @@ Anggie Quezada
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
-
----
-
-Puedes personalizar este README según las necesidades específicas de tu proyecto, agregando más detalles sobre su funcionamiento, las estructuras de datos utilizadas, los algoritmos implementados, etc. Asegúrate de incluir cualquier instrucción adicional necesaria para ejecutar y comprender el proyecto.
