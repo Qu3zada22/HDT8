@@ -3,16 +3,32 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
+/**
+ * Implementación de un heap binario utilizando un vector interno para almacenar los elementos.
+ * Esta clase implementa la interfaz PriorityQueue<E>, proporcionando métodos para insertar,
+ * eliminar y verificar si el heap está vacío, así como para obtener su tamaño.
+ *
+ * @param <E> el tipo de elementos que se almacenarán en el heap, que debe ser comparable para poder
+ *            establecer el orden de prioridad.
+ */
 public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E> {
-    private Vector<E> data;
+    private Vector<E> data; // Vector interno para almacenar los elementos del heap
 
+    /**
+     * Constructor predeterminado que crea un nuevo VectorHeap vacío.
+     */
     public VectorHeap() {
         data = new Vector<>();
     }
 
-    // Constructor adicional para construir el heap a partir de un archivo
+    /**
+     * Constructor adicional que construye el heap a partir de un archivo de texto que contiene
+     * los datos de los pacientes.
+     *
+     * @param filename el nombre del archivo que contiene los datos de los pacientes.
+     */
     public VectorHeap(String filename) {
-        this();
+        this(); // Llama al constructor predeterminado para inicializar el vector interno
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String linea;
             while ((linea = br.readLine()) != null) {
@@ -31,6 +47,7 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         }
     }
 
+    // Métodos para ajustar el índice de los elementos en el heap
     // Método para obtener el índice del padre de un nodo en el heap
     private int parent(int i) {
         return (i - 1) / 2;
@@ -53,7 +70,11 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         data.set(j, temp);
     }
 
-    // Método para insertar un elemento en el heap
+    /**
+     * Inserta un elemento en el heap y ajusta el heap para mantener el orden de prioridad.
+     *
+     * @param value el elemento que se va a insertar en el heap.
+     */
     @Override
     public void add(E value) {
         data.add(value);
@@ -68,7 +89,11 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         }
     }
 
-    // Método para eliminar y devolver el elemento con mayor prioridad del heap
+    /**
+     * Elimina y devuelve el elemento con mayor prioridad del heap.
+     *
+     * @return el elemento con mayor prioridad del heap, o null si el heap está vacío.
+     */
     @Override
     public E remove() {
         if (data.isEmpty())
@@ -98,13 +123,21 @@ public class VectorHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         }
     }
 
-    // Método para verificar si el heap está vacío
+    /**
+     * Verifica si el heap está vacío.
+     *
+     * @return true si el heap está vacío, false en caso contrario.
+     */
     @Override
     public boolean isEmpty() {
         return data.isEmpty();
     }
 
-    // Método para obtener el tamaño del heap
+    /**
+     * Obtiene el tamaño del heap, es decir, el número de elementos en el heap.
+     *
+     * @return el tamaño del heap.
+     */
     @Override
     public int size() {
         return data.size();
